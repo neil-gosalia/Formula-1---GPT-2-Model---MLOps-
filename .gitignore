@@ -1,0 +1,16 @@
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+src/api/.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Model files (too large for git)
+model/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
