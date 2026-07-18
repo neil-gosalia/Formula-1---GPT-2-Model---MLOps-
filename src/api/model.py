@@ -22,6 +22,7 @@ def load_model():
     model.eval()
     print(f"Model loaded from {model_path}")
 
+
 def generate_text(prompt: str, top_p: float, temperature: float, max_length: int) -> str:
     if model is None or tokenizer is None:
         raise ValueError("Model not loaded. Call load_model() first")
