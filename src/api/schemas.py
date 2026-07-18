@@ -6,6 +6,7 @@ class GenerateRequest(BaseModel):
     temperature: float = 0.80 
     max_length: int = 200
 
+
 class GenerateResponse(BaseModel):
     response: str
     prompt: str

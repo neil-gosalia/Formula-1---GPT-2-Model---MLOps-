@@ -12,7 +12,6 @@ def test_health_check():
     assert response.status_code == 200
     assert response.json()['status'] == "ok"
 
-
 def test_generate_endpoint_exists(): #checks if endpoint exists and responds
     response = client.post("/generate", json={
         "prompt":"Lewis Hamilton",

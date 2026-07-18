@@ -17,7 +17,8 @@ app = FastAPI(
 
 @app.get("/")
 def health_check():
-    return {"status":"ok", "model":"f1 text generation"}
+    return {"status": "ok", "model": "f1 text generation"}
+
 
 @app.post("/generate", response_model=GenerateResponse)
 def generate(request: GenerateRequest):
@@ -26,5 +27,5 @@ def generate(request: GenerateRequest):
     temperature = request.temperature
     max_length = request.max_length
 
-    output = generate_text(prompt= input_text, top_p= top_p, temperature= temperature, max_length= max_length)
+    output = generate_text(prompt=input_text, top_p=top_p, temperature=temperature, max_length=max_length)
     return GenerateResponse(response=output, prompt=input_text)
