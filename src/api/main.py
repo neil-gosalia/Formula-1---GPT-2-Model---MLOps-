@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from schemas import GenerateRequest, GenerateResponse
 from model import load_model, generate_text
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     load_model()
@@ -14,6 +15,7 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
+
 
 @app.get("/")
 def health_check():
@@ -27,5 +29,8 @@ def generate(request: GenerateRequest):
     temperature = request.temperature
     max_length = request.max_length
 
-    output = generate_text(prompt=input_text, top_p=top_p, temperature=temperature, max_length=max_length)
+    output = generate_text(prompt=input_text,
+                           top_p=top_p,
+                           temperature=temperature,
+                           max_length=max_length)
     return GenerateResponse(response=output, prompt=input_text)
