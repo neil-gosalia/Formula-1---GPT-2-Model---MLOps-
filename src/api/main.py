@@ -29,10 +29,12 @@ def generate(request: GenerateRequest):
     temperature = request.temperature
     max_length = request.max_length
     try:
-        output = generate_text(prompt=input_text,
-                            top_p=top_p,
-                            temperature=temperature,
-                            max_length=max_length)
+        output = generate_text(
+            prompt=input_text,
+            top_p=top_p,
+            temperature=temperature,
+            max_length=max_length
+        )
         return GenerateResponse(response=output, prompt=input_text)
     except ValueError as e:
         raise HTTPException(status_code=500, detail=str(e))
