@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from contextlib import asynccontextmanager
 from schemas import GenerateRequest, GenerateResponse
 from model import load_model, generate_text
@@ -28,9 +28,11 @@ def generate(request: GenerateRequest):
     top_p = request.top_p
     temperature = request.temperature
     max_length = request.max_length
-
-    output = generate_text(prompt=input_text,
-                           top_p=top_p,
-                           temperature=temperature,
-                           max_length=max_length)
-    return GenerateResponse(response=output, prompt=input_text)
+    try:
+        output = generate_text(prompt=input_text,
+                            top_p=top_p,
+                            temperature=temperature,
+                            max_length=max_length)
+        return GenerateResponse(response=output, prompt=input_text)
+    except ValueError as e:
+        raise HTTPException(status_code=500, detail=str(e))
